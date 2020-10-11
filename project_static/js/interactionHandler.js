@@ -82,7 +82,7 @@ MmtMap.clickInteractions = {
 	        
 	        // Once you have the data, compile the HTML fragments
 
-	        var pageHeader = _.template(MmtMap.clickInteractions.pageHeaderHtmlTemplate);
+	        let pageHeader = _.template(MmtMap.clickInteractions.pageHeaderHtmlTemplate);
 
 	        page = pageHeader({
 	            banner: data.properties.banner_image,
@@ -91,7 +91,7 @@ MmtMap.clickInteractions = {
 	        });
 
 	        if (data.properties.popup_audio_file != null) {
-	            var popupAudio = _.template(MmtMap.clickInteractions.audioFileHtmlTemplate);
+	            let popupAudio = _.template(MmtMap.clickInteractions.audioFileHtmlTemplate);
 
 	            popupAudio = popupAudio({
 	                title: data.properties.popup_audio_title,
@@ -102,19 +102,19 @@ MmtMap.clickInteractions = {
 	            page = page + popupAudio;
 	        }
 
-	        for (var i=0; i < data.attachments.length; i++) {
-	            var attachment = data.attachments[i];
+	        for (let i=0; i < data.attachments.length; i++) {
+	            let attachment = data.attachments[i];
 	            
 	            switch (attachment.attachment_type) {
 	                case 'document':
-	                    var doc = _.template(MmtMap.clickInteractions.documentHtmlTemplate);
+	                    let doc = _.template(MmtMap.clickInteractions.documentHtmlTemplate);
 	                    doc = doc({
 	                        document_body: attachment.body_processed
 	                    });
 	                    page = page + doc;
 	                    break;
 	                case 'audiofile':
-	                    var af = _.template(MmtMap.clickInteractions.audioFileHtmlTemplate);
+	                    let af = _.template(MmtMap.clickInteractions.audioFileHtmlTemplate);
 	                    af = af({
 	                        title: attachment.title,
 	                        file: attachment.file,
@@ -123,7 +123,7 @@ MmtMap.clickInteractions = {
 	                    page = page + af;
 	                    break;
 	                case 'image':
-	                    var img = _.template(MmtMap.clickInteractions.imageHtmlTemplate); 
+	                    let img = _.template(MmtMap.clickInteractions.imageHtmlTemplate); 
 	                    img = img({
 	                        title: attachment.title,
 	                        file: attachment.file
@@ -144,7 +144,7 @@ MmtMap.clickInteractions = {
 	        // If the browser supports it, update the url so that links to specific sites can be shared
 	        
 	        if (window.history && window.history.pushState) {
-	            var params = new URLSearchParams(location.search);
+	            let params = new URLSearchParams(location.search);
 	            params.set('feature_type', data.properties. feature_type);
 	            params.set('id', data.id);
 	            window.history.pushState({url: window.location.pathname}, '', '?' + params.toString());
@@ -162,9 +162,9 @@ MmtMap.clickInteractions = {
 
 	            // Then attach the handler for the progress bar
 	            $('.' + player_id + ' .progress_bar_container').click(function(e) {
-	                var pos = e.pageX - $(this).offset().left;
-	                var width = $(this).width();
-	                var percentage = (pos / width) * 100;
+	                let pos = e.pageX - $(this).offset().left;
+	                let width = $(this).width();
+	                let percentage = (pos / width) * 100;
 	                audioHandler.setSeekPositionFromProgressBar(player_id, percentage);
 	            });
 
@@ -174,7 +174,7 @@ MmtMap.clickInteractions = {
 	        $('.close_feature').click(function() {
 	            
 	            $('.feature_detail .play').each(function() {
-	                var player_id = $(this).data('player_id');
+	                let player_id = $(this).data('player_id');
 	                // If the sound exists, forget about it...
 	                try {
 	                    audioHandler.sounds[player_id].unload();
@@ -240,9 +240,14 @@ MmtMap.clickInteractions = {
 	            popupHtml = popupHtml +  popupAudioFileHtml;   
 	        }
 
+	        let buttonHtml = '';
 
-
-	        let buttonHtml = '<div class="text-center"><br /><button type="button" class="btn btn-sm btn-light read_more" href="#">Read More</button> <button type="button" class="btn btn-sm btn-light close_popup">Close</button></div>';
+	        // If there are documents attached to the feature, add a 'read more' button, else just add a 'close' button
+	        if (data.properties.document_count > 0) {
+	        	buttonHtml += '<div class="text-center"><br /><button type="button" class="btn btn-sm btn-light read_more" href="#">Read More</button> <button type="button" class="btn btn-sm btn-light close_popup">Close</button></div>';	
+	        } else {
+	        	buttonHtml += '<div class="text-center"><br /><button type="button" class="btn btn-sm btn-light close_popup">Close</button></div>';
+	        }
 	        
 	        popupHtml = popupHtml + buttonHtml;
 	        MmtMap.clickInteractions.clickPopup.setLngLat(coords).setHTML(popupHtml).addTo(map);

@@ -77,6 +77,16 @@ class AbstractFeature(models.Model):
 		else:
 			return ''
 
+	def get_document_count(self):
+		if self.get_type() == 'point':
+			return Document.objects.filter(point=self.id).count()
+		elif self.get_type() == 'polygon':
+			return Document.objects.filter(polygon=self.id).count()
+		elif self.get_type() == 'line':
+			return Document.objects.filter(line=self.id).count()
+
+
+
 	def __str__(self):
 		return self.name
 

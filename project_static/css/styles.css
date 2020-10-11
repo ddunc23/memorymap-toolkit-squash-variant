@@ -421,6 +421,15 @@ article img {
 	width: 101%;
 }
 
+/* Tags */
+
+#map_tags {
+    background-color: white;
+    padding: 2px;
+    border-radius: 2px;
+    max-width: 22rem;
+}
+
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {

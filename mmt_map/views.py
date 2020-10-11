@@ -15,6 +15,7 @@ from psycopg2 import sql
 
 # Third Party Django apps
 from constance import config
+from taggit.models import Tag
 
 # Memory Map Toolkit
 from .models import Point, Line, Polygon, Theme, Document, Image, AudioFile
@@ -27,9 +28,9 @@ def index(request):
 	"""Base map"""
 
 	themes = Theme.objects.all()
-	pages = Page.objects.all().order_by('order')
+	tags = Tag.objects.all()
 
-	return render(request, 'mmt_map/index.html', {'themes': themes})
+	return render(request, 'mmt_map/index.html', {'themes': themes, 'tags': tags})
 
 
 def text_only_feature_list(request):
