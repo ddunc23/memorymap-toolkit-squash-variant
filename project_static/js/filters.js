@@ -160,6 +160,7 @@ MmtMap.tagFilter = {
             map.setFilter('polygon_outlines', ['match', ['id'], polygon_ids, true, false]);    
         } else {
             map.setLayoutProperty('polygons', 'visibility', 'none');
+            map.setLayoutProperty('polygon_outlines', 'visibility', 'none');
         }
 
         if (point_ids.length > 0) {
@@ -167,6 +168,7 @@ MmtMap.tagFilter = {
             map.setFilter('points_labels', ['match', ['id'], point_ids, true, false]);    
         } else {
             map.setLayoutProperty('points', 'visibility', 'none');
+            map.setLayoutProperty('points_labels', 'visibility', 'none');
         }
 
         if (line_ids.length > 0) {
@@ -174,6 +176,7 @@ MmtMap.tagFilter = {
             map.setFilter('lines_labels', ['match', ['id'], line_ids, true, false]);    
         } else {
             map.setLayoutProperty('lines', 'visibility', 'none');
+            map.setLayoutProperty('lines_labels', 'visibility', 'none');
         }
     },
 
