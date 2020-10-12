@@ -161,6 +161,7 @@ MmtMap.tagFilter = {
         } else {
             map.setLayoutProperty('polygons', 'visibility', 'none');
             map.setLayoutProperty('polygon_outlines', 'visibility', 'none');
+            map.setLayoutProperty('polygon_labels', 'visibility', 'none');
         }
 
         if (point_ids.length > 0) {
