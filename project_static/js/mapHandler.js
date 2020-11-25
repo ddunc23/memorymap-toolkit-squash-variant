@@ -127,6 +127,28 @@ let logoControl = new MemorymapperLogoControl();
 map.addControl(logoControl, 'bottom-right');
 
 
+// Add Nina's hand-drawn key
+
+class KeyControl {
+    onAdd(map) {
+        this._map = map;
+        this._container = document.createElement('div');
+        this._container.className = 'mapboxgl-ctrl key';
+        this._container.innerHTML = '<h6>Key</h6><span class="key_img"><img src="/static/img/key/key-1.png" alt="Places we planned for"/></span>Places we planned for<br /><span class="key_img"><img src="/static/img/key/key-2.png" alt="Squash shop and cafe"/></span>Squash shop and cafe<br /><span class="key_img"><img src="/static/img/key/key-3.png" alt="Squash food gardens"/></span>Squash food gardens<br /><span class="key_img"><img src="/static/img/key/key-4.png" alt="Community food gardens"/></span>Community food gardens<br /><span class="key_img"><img src="/static/img/key/key-5.png" alt="Community activities"/></span>Community activities<br /><span class="key_img"><img src="/static/img/key/key-6.png" alt="Greenspace or play"/></span>Greenspace or play<br /><span class="key_img"><img src="/static/img/key/key-7.png" alt="Roads and parking"/></span>Roads and parking<br /><span class="key_img"><img src="/static/img/key/key-8.png" alt="Houses and flats"/></span>Houses and flats<br /><span class="key_img"><img src="/static/img/key/key-9.png" alt="Trees and shrubs"/></span>Trees and shrubs<br /><span class="key_img"><img src="/static/img/key/key-10.png" alt="Water: hidden"/></span>Water: hidden<br /><span class="key_img"><img src="/static/img/key/key-11.png" alt="Water: seen"/></span>Water: seen<br />';
+        return this._container;
+    }
+
+    onRemove() {
+        this._container.parentNode.removeChild(this._container);
+        this._map = undefined;
+    }
+}
+
+let keyControl = new KeyControl();
+
+map.addControl(keyControl, 'bottom-right');
+
+
 
 // Then load the interactive features
 

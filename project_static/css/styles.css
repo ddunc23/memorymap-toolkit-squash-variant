@@ -430,6 +430,27 @@ article img {
     max-width: 22rem;
 }
 
+/* Key */
+
+.key {
+	background-color: white;
+    padding: 12px;
+    border-radius: 2px;
+    margin-left: 25px!important;
+}
+
+.key_img {
+	width: 60px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.key img {
+	max-width: 60px;
+	max-height: 15px;
+	margin: 0 auto;
+}
+
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
